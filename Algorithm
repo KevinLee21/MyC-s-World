@@ -1,1 +1,41 @@
+#include<iostream>
+using namespace std;
+void Merge(int * data, int p, int q, int r)
+{
+	int n1 = q - p + 1,
+		n2 = r - q;
+	int *L = new int[n1];
+	int *R = new int[n2];
+	for (int i = 0; i < n1; i++)
+		L[i] = data[p + i];
+	for (int i = 0; i < n2; i++)
+		R[i] = data[q + i + 1];
+	L[n1] = 10000;
+	R[n2] = 10000;
+	int i = 0,
+		j = 0;
 
+	for(int k = p; k <=r; k++)
+		if (L[i] <= R[j])
+		{
+			data[k] = L[i];
+			i++;
+		}
+		else
+		{
+			data[k] = R[j];
+			j++;
+		}
+}
+
+void MergeSort(int *data, int p, int r)
+{
+	if (p < r)
+	{
+		int q;
+		q = ((p + r) / 2);
+		MergeSort(data, p, q);
+		MergeSort(data, q + 1, r);
+		Merge(data, p, q, r);
+	}
+}
