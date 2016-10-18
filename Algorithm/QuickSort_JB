@@ -1,0 +1,12 @@
+void QuickSort(int *data, int l, int u)
+{
+	int i, m;
+	if (l >= u)   return;
+	m = l;
+	for (i = l + 1; i <= u; i++)
+		if (data[i] < data[l])
+			swap(data[++m], data[i]);
+	swap(data[m], data[l]);
+	QuickSort(data, l, m - 1);
+	QuickSort(data, m + 1, u);
+}
